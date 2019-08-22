@@ -54,6 +54,7 @@ class Logger {
 	const gravity_5 = 'Notice';
 	const gravity_6 = 'Info';
 	const gravity_7 = 'Debug';
+	const gravity_8 = 'Success';
 
 	/**
 	 * Construct the logged file
