@@ -56,4 +56,4 @@ If you really like what I do or to support me, feel free to [donate](https://www
 
 ## License
 
-Logger is licensed under the [GPLv3 or later](LICENSE.md).
+Logger is licensed under the [GPLv3 or later](https://github.com/MaximeCulea/logger/blob/master/LICENSE).
