@@ -1,0 +1,19 @@
+{
+	"name":"maximeculea/logger",
+	"license":"GPL-3.0",
+	"description":"A simple PHP logger for WordPress.",
+	"authors":[
+		{
+			"name":"Maxime Culea",
+			"homepage":"https://maximeculea.fr"
+		}
+	],
+	"require":{
+		"composer/installers":"~1.0"
+	},
+	"autoload":{
+		"files":[
+			"logger.php"
+		]
+	}
+}
