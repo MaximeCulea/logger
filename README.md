@@ -30,18 +30,30 @@ List of other message types :
 	const gravity_6 = 'Info';
 	const gravity_7 = 'Debug';
 
-# Installation
+## Installation
 
 This plugin is a Composer library so it can be installed in a few ways:
 
-## Composer Autoloaded
+### Composer Autoloaded
 
 `composer require maximeculea/logger`
 
 `logger.php` file will be automatically autoloaded by Composer and it *won't* appear in your plugins.
 
-## Manually as a must-use plugin
+### Manually as a must-use plugin
 
 If you don't use Composer, you can manually copy `logger.php` into your `mu-plugins` folder.
 
-We **do not** recommend using this as a normal (non-mu) plugin. It makes it too easy to disable or remove the plugin.
+I **do not** recommend using this as a normal (non-mu) plugin. It makes it too easy to disable or remove the plugin.
+
+# Who ?
+
+Created by Maxime Culea.
+
+This plugin is only maintained, which means we do not guarantee some free support. Consider reporting an [issue](#issues--features-request--proposal) and be patient. 
+
+If you really like what I do or to support me, feel free to [donate](https://www.paypal.me/MaximeCulea).
+
+## License
+
+Logger is licensed under the [GPLv3 or later](LICENSE.md).
