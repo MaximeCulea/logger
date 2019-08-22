@@ -5,7 +5,7 @@
  * Description: A simple PHP logger for WordPress.
  * Author:      MaximeCulea
  * Author URI:  https://maximeculea.fr
- * Version:     1.0.0
+ * Version:     1.0.1
  */
 
 if ( class_exists( 'Logger' ) ) {
@@ -14,7 +14,7 @@ if ( class_exists( 'Logger' ) ) {
 
 class Logger {
 	/**
-	 * The log $file_path.
+	 * The log file path.
 	 *
 	 * @var string
 	 */
@@ -26,7 +26,7 @@ class Logger {
 	 *
 	 * @var string
 	 */
-	private $file_extension = '.log';
+	private $log_ext = '.log';
 
 	/**
 	 * The log file max size in octets.
@@ -66,12 +66,9 @@ class Logger {
 	 * @author Maxime Culea
 	 */
 	function __construct( $log_path, $log_ext = '.log', $log_size = 0 ) {
-		if ( ! isset( $log_path ) || empty( $log_path ) ) {
-			return;
-		}
-
 		$this->log_path = $log_path;
 		$this->log_ext  = $log_ext;
+
 		if ( $log_size > 0 ) {
 			$this->log_size = $log_size;
 		}
@@ -93,7 +90,7 @@ class Logger {
 		}
 
 		// Make the log path
-		$log_path = $this->log_path . $this->file_extension;
+		$log_path = $this->log_path . $this->log_ext;
 
 		// Maybe move the file
 		$this->maybe_move_file( $log_path );
@@ -133,7 +130,7 @@ class Logger {
 		}
 
 		// Rename the file
-		rename( $log_path, sprintf( '%s-%s%s', $this->log_path, date( 'Y-m-d-H-i-s' ), $this->file_extension ) );
+		rename( $log_path, sprintf( '%s-%s%s', $this->log_path, date( 'Y-m-d-H-i-s' ), $this->log_ext ) );
 	}
 
 	/**
