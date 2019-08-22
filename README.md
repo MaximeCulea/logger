@@ -36,7 +36,8 @@ This plugin is a Composer library so it can be installed in a few ways:
 
 ### Composer Autoloaded
 
-`composer require maximeculea/logger`
+- Add repository source : `{ "type": "vcs", "url": "https://github.com/MaximeCulea/logger" }`.
+- Include `"maximeculea/logger": "dev-master"` in your composer file for last master's commits or a released tag.
 
 `logger.php` file will be automatically autoloaded by Composer and it *won't* appear in your plugins.
 
