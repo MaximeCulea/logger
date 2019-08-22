@@ -11,7 +11,7 @@ It will create a file for the instance, in which you can log whatever you want b
     <?php $logger = new Logger( WP_CONTENT_DIR . '/my-logger' );
     $logger->log_this( 'Log this message.', Logger::gravity_0 );
 
-For this instance, will create a file : 'wp-content/my-logger.log'.
+For this instance, will create a file : `wp-content/my-logger.log`.
 Then will log the message : `[d-m-Y H:i:s][Emerg] Log this message.`
 
 ## Message types
