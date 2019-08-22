@@ -50,7 +50,7 @@ I **do not** recommend using this as a normal (non-mu) plugin. It makes it too e
 
 Created by Maxime Culea.
 
-This plugin is only maintained, which means we do not guarantee some free support. Consider reporting an [issue](#issues--features-request--proposal) and be patient. 
+This plugin is only maintained, which means we do not guarantee some free support. Consider reporting an [issue](https://github.com/MaximeCulea/logger/issues/new) and be patient. 
 
 If you really like what I do or to support me, feel free to [donate](https://www.paypal.me/MaximeCulea).
 
