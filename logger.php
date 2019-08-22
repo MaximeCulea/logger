@@ -5,48 +5,43 @@
  * Description: A simple PHP logger for WordPress.
  * Author:      MaximeCulea
  * Author URI:  https://maximeculea.fr
- * Version:     1.0
+ * Version:     1.0.0
  */
 
-/**
- * Check if class already exists
- *
- * @since 0.3
- */
 if ( class_exists( 'Logger' ) ) {
 	return;
 }
 
 class Logger {
 	/**
-	 * The log file path
+	 * The log $file_path.
 	 *
 	 * @var string
 	 */
-	private $file_path;
+	private $log_path;
 
 	/**
-	 * The log file extension
-	 * .log by default
+	 * The log file extension.
+	 * Default to .log.
 	 *
 	 * @var string
 	 */
 	private $file_extension = '.log';
 
 	/**
-	 * The log file max size
-	 * Here 400Mo
+	 * The log file max size in octets.
+	 * Default to 400Mo.
 	 *
 	 * @var string
 	 */
-	private $retention_size = '419430400';
+	private $log_size = '419430400';
 
 	/**
-	 * If the logger is ready or not
+	 * If the logger is ready or not.
 	 *
 	 * @var bool
 	 */
-	private $is_configured = false;
+	private $is = false;
 
 	/**
 	 * Level of gravity for the logging
@@ -63,56 +58,47 @@ class Logger {
 	/**
 	 * Construct the logged file
 	 *
-	 * @param        $file_path
-	 * @param string $file_extension
-	 * @param string $retention_size
+	 * @param string $log_path The path for the logging file.
+	 * @param string $log_ext  Logging file extension, by default .log.
+	 * @param int    $log_size Size for logging file, before spliting it.
+	 *
+	 * @author Maxime Culea
 	 */
-	function __construct( $file_path, $file_extension = '.log', $retention_size = '' ) {
-		if ( ! isset( $file_path ) || empty( $file_path ) ) {
-			return false;
+	function __construct( $log_path, $log_ext = '.log', $log_size = 0 ) {
+		if ( ! isset( $log_path ) || empty( $log_path ) ) {
+			return;
 		}
 
-		// Put file path
-		$this->file_path = $file_path;
-
-		// File extension
-		if ( isset( $file_extension ) ) {
-			$this->file_extension = $file_extension;
+		$this->log_path = $log_path;
+		$this->log_ext  = $log_ext;
+		if ( $log_size > 0 ) {
+			$this->log_size = $log_size;
 		}
 
-		// Retention size
-		if ( isset( $retention_size ) && ! empty( $retention_size ) && (int) $retention_size > 0 ) {
-			$this->retention_size = $retention_size;
-		}
-
-		$this->is_configured = true;
+		$this->is = true;
 	}
 
 	/**
 	 * Log data in multiple files when full
 	 *
-	 * @param string $message The message
-	 * @param string $type    The message type
+	 * @param string $message The message.
+	 * @param string $type    The message type.
 	 *
 	 * @author Maxime CULEA
-	 *
-	 * @return bool
 	 */
 	public function log_this( $message, $type = self::gravity_7 ) {
-		if ( false === $this->is_configured ) {
-			return false;
+		if ( ! $this->is ) {
+			return;
 		}
 
-		// Make the file path
-		$file_path = $this->file_path . $this->file_extension;
+		// Make the log path
+		$log_path = $this->log_path . $this->file_extension;
 
 		// Maybe move the file
-		$this->maybe_move_file( $file_path );
+		$this->maybe_move_file( $log_path );
 
 		// Log the error
-		error_log( sprintf( '[%s][%s] %s', date( 'd-m-Y H:i:s' ), $type, self::convert_message( $message ) ) . "\n", 3, $file_path );
-
-		return true;
+		error_log( sprintf( '[%s][%s] %s', date( 'd-m-Y H:i:s' ), $type, self::convert_message( $message ) ) . "\n", 3, $log_path );
 	}
 
 	/**
@@ -135,26 +121,22 @@ class Logger {
 	/**
 	 * Rename the file if exceed the file max retention
 	 *
-	 * @param $file_path
+	 * @param $log_path
 	 *
 	 * @author Maxime Culea
 	 */
-	private function maybe_move_file( $file_path ) {
+	private function maybe_move_file( $log_path ) {
 		// If the file exists
-		if ( ! is_file( $file_path ) ) {
-			return;
-		}
-
-		if ( ! $this->exceed_retention( filesize( $file_path ) ) ) {
+		if ( ! is_file( $log_path ) || ! $this->exceed_retention( filesize( $log_path ) ) ) {
 			return;
 		}
 
 		// Rename the file
-		rename( $file_path, sprintf( '%s-%s%s', $this->file_path, date( 'Y-m-d-H-i-s' ), $this->file_extension ) );
+		rename( $log_path, sprintf( '%s-%s%s', $this->log_path, date( 'Y-m-d-H-i-s' ), $this->file_extension ) );
 	}
 
 	/**
-	 * Check retention size is exceeded or not
+	 * Check retention size is exceeded or not.
 	 *
 	 * @param $size
 	 *
@@ -163,6 +145,6 @@ class Logger {
 	 * @return bool
 	 */
 	private function exceed_retention( $size ) {
-		return $size > $this->retention_size;
+		return $size > $this->log_size;
 	}
 }
