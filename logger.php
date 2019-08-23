@@ -90,17 +90,17 @@ class Logger {
 		}
 
 		// Make the log path
-		$log_path = $this->log_path . $this->log_ext;
+		$log_full_path = $this->log_path . $this->log_ext;
 
 		// Maybe move the file
-		$this->maybe_move_file( $log_path );
+		$this->maybe_move_file( $log_full_path );
 
 		// Log the error
-		error_log( sprintf( '[%s][%s] %s', date( 'd-m-Y H:i:s' ), $type, self::convert_message( $message ) ) . "\n", 3, $log_path );
+		error_log( sprintf( '[%s][%s] %s', date( 'd-m-Y H:i:s' ), $type, $this->convert_message( $message ) ) . "\n", 3, $log_full_path );
 	}
 
 	/**
-	 * Change the message to the right type if needed
+	 * Change the message into the right type.
 	 *
 	 * @param mixed $message
 	 *
@@ -108,7 +108,7 @@ class Logger {
 	 *
 	 * @return string
 	 */
-	private static function convert_message( $message ) {
+	public function convert_message( $message ) {
 		if ( is_object( $message ) || is_array( $message ) ) {
 			$message = print_r( $message, true );
 		}
@@ -117,32 +117,18 @@ class Logger {
 	}
 
 	/**
-	 * Rename the file if exceed the file max retention
+	 * Rename the file if exceed the log max size.
 	 *
-	 * @param $log_path
+	 * @param $log_full_path
 	 *
 	 * @author Maxime Culea
 	 */
-	private function maybe_move_file( $log_path ) {
-		// If the file exists
-		if ( ! is_file( $log_path ) || ! $this->exceed_retention( filesize( $log_path ) ) ) {
+	private function maybe_move_file( $log_full_path ) {
+		if ( $this->log_size > filesize( $log_full_path ) ) {
 			return;
 		}
 
 		// Rename the file
-		rename( $log_path, sprintf( '%s-%s%s', $this->log_path, date( 'Y-m-d-H-i-s' ), $this->log_ext ) );
-	}
-
-	/**
-	 * Check retention size is exceeded or not.
-	 *
-	 * @param $size
-	 *
-	 * @author Maxime Culea
-	 *
-	 * @return bool
-	 */
-	private function exceed_retention( $size ) {
-		return $size > $this->log_size;
+		rename( $log_full_path, sprintf( '%s-%s%s', $this->log_path, date( 'Y-m-d-H-i-s' ), $this->log_ext ) );
 	}
 }
