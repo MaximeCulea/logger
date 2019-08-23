@@ -5,7 +5,7 @@
  * Description: A simple PHP logger for WordPress.
  * Author:      MaximeCulea
  * Author URI:  https://maximeculea.fr
- * Version:     1.0.1
+ * Version:     1.0.2
  */
 
 if ( class_exists( 'Logger' ) ) {
