@@ -39,7 +39,7 @@ Some times, because of rights, log file will not be created, reproduce this step
 
 * cd web/app/plugins/mc-jobs/ (log path)
 * touch fetching-api.log (log filename)
-* chmod rw fetching-api.log (set log rights)
+* chmod 777 fetching-api.log (set log rights)
 
 ## Installation
 
