@@ -1,16 +1,4 @@
-<?php
-/**
- * Plugin Name: Logger
- * Plugin URI:  https://maximeculea.fr
- * Description: A simple PHP logger for WordPress.
- * Author:      MaximeCulea
- * Author URI:  https://maximeculea.fr
- * Version:     1.0.2
- */
-
-if ( class_exists( 'Logger' ) ) {
-	return;
-}
+<?php namespace MC\Logger;
 
 class Logger {
 	/**
