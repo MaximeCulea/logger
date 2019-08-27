@@ -1,4 +1,4 @@
-<?php namespace MC;
+<?php namespace MC\Logger;
 
 class logger {
 	/**
