@@ -1,6 +1,6 @@
 <?php namespace MC\Logger;
 
-class logger {
+class Logger {
 	/**
 	 * The log file path.
 	 *
