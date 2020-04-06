@@ -91,6 +91,11 @@ class Logger {
 
 		// Make the log path
 		$log_full_path = $this->log_path . $this->log_ext;
+		
+		// Check if file exists, otherwise create it
+		if ( ! file_exists( $log_full_path ) ) {
+			fopen( $log_full_path, "w" );
+		}
 
 		// Maybe move the file
 		$this->maybe_move_file( $log_full_path );
